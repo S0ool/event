@@ -1,0 +1,17 @@
+{% extends 'app/layouts/base.html' %}
+
+{% block title %}Events{% endblock %}
+{% block content %}
+<h1>Events</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Event</button>
+</form>
+
+<h2>Event List</h2>
+{% for event in events %}
+    <p><a href="{% url 'event_info' event.id %}">{{ event.title }}</a></p>
+    <img src="{{ event.image.url }}">
+{% endfor %}
+{% endblock %}

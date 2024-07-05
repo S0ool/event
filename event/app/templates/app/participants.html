@@ -1,0 +1,17 @@
+{% extends 'app/layouts/base.html' %}
+
+{% block title %}Participants{% endblock %}
+{% block content %}
+<h1>Participants</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Participant</button>
+</form>
+
+<h2>Participant List</h2>
+    {% for participant in participants %}
+        <p><a href="{% url 'participant_info' participant.id %}">{{ participant.user.username }}</a></p>
+
+    {% endfor %}
+{% endblock %}

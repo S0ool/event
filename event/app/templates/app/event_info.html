@@ -1,0 +1,21 @@
+{% extends 'app\layouts/base.html' %}
+
+{% block title %}Event Info{% endblock %}
+{% block content %}
+<h1>{{ event.title }}</h1>
+<p>{{ event.description }}</p>
+<p>{{ event.date }}</p>
+<p>{{ event.location }}</p>
+<img src="{{ event.image.url }}" alt="{{ event.title }}">
+<form action="{% url 'delete_event' event.id %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+</form>
+<h2>Edit Event</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}

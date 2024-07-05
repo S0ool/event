@@ -1,0 +1,21 @@
+{% extends 'app/layouts/base.html' %}
+
+{% block title %}Participant Info{% endblock %}
+{% block content %}
+<h1>{{ participant.user.username }}</h1>
+<p>Events:</p>
+    {% for event in participant.events.all %}
+    <p>{{ event.title }}</p>
+    {% endfor %}
+<form action="{% url 'delete_participant' participant.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+</form>
+<h2>Edit Participant</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}
